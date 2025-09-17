@@ -1,3 +1,76 @@
+Lab10 - Create a structure called Emp 
+		empno int, ename string, salary float  
+		two receiver methods
+			1. print 
+		    2. salaryIncrement(percent)
+
+	  Create a structure called EmpManager 
+		slice of Emp 
+		two receiver methods
+			add(Emp) 
+			print (show a table of employees)
+
+Lab9 - Receiver methods and pass by ref 
+	package main 
+	import "fmt"
+	
+	type Vertex  struct {
+		X int
+		Y int
+	}
+	
+	func (thisv Vertex) printMethod(){
+		fmt.Println("Print Vertext Details - ", thisv.X, thisv.Y)
+	}
+	func (thisv *Vertex) shiftMethod(dx,dy int ){
+		fmt.Println("Print Vertext Details - ", thisv.X, thisv.Y)
+		thisv.X = thisv.X+ dx
+		thisv.Y = thisv.Y+ dy
+		fmt.Println("Shifting Vertext Details - ", thisv.X, thisv.Y)
+	}
+	
+	/* This will not have any impact
+	func printfn(v Vertex){
+		fmt.Println("Print Vertext Details - ", v.X, v.Y)
+		v.X=100
+	}
+	*/
+	func printfn(v *Vertex){
+		fmt.Println("Print Vertext Details - ", v.X, v.Y)
+		v.X=100
+	}
+	func main(){
+		v1 := Vertex{1, 2}  
+		fmt.Println(v1)
+		printfn(&v1)
+		v1.printMethod()
+		v1.shiftMethod(5,5)
+		fmt.Println(v1)
+	}
+
+Lab8 - create a new folder (Demo2)
+		Lab1.go (Intro to structures)
+package main 
+import "fmt"
+
+type Vertex  struct {
+	X int
+	Y int
+}
+func main(){
+	v1 := Vertex{}
+	v1.X = 101
+	v1.Y =202
+	fmt.Println(v1)
+	v1 = Vertex{1, 2}  
+	fmt.Println(v1)
+	v1 = Vertex{X: 1, Y:100} 
+	fmt.Println(v1)
+
+	p  := &Vertex{1, 2} // has type *Vertex
+	fmt.Println(*p)
+}
+
 Lab7 - sorting (standlibrary addition - slices
 	package main
 	
