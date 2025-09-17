@@ -1,3 +1,26 @@
+Lab7 - sorting (standlibrary addition - slices
+	package main
+	
+	import (
+		"fmt"
+		"sort"
+	)
+	
+	func main() {
+	
+		primes := [6]int{20, 13, 445, 01, 11, 113}
+		names := [6]string{"aa","bb","vv","ABC", "BBB" ,"XYZ"}
+	
+		fmt.Println("Original Array", primes)
+		fmt.Println("Original Array", names)
+	
+		// sort.Sort -> Generic method for custom sort
+		sort.Ints(primes[:])
+		sort.Strings(names[:])
+		fmt.Println("Final ", primes)
+		fmt.Println("Final ", names)
+	}
+
 --> Asgn -> accept a number from user and create string array of that size and accept names and print 
 Lab6 - make and append for dynamic allocation 
 	package main 
