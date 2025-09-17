@@ -1,3 +1,33 @@
+Lab3 - Lab3.go (Functions and returns, multiple returns 
+      create Lab3.go 
+
+      package main
+      import "fmt"
+      func calc(x,y int ) (int, int) {
+	      fmt.Println("in add with ", x , " and ", y)
+	      //return x+y, x-y
+      }
+      func main(){
+      	n1, n2  := calc(1000,400)
+      	fmt.Println("Sum = ", n1, " Sub = ", n2)
+      	n1, n22  := calc(10000,4000)
+      	fmt.Println("Sum = ", n1, " Sub = ", n22)
+      }
+      cmd>go run Lab3.go 
+            observe error (wants vs have), uncomment 
+            observe n1 and n22 on line n1, n22  := calc(10000,4000)
+                  change n1 and n22 to old/new variables 
+                        if both the variables are existing -> error 
+                        if any one is new -> no error 
+     move calc function in new file Lab3Helper.go 
+     cmd>go run lab3.go 
+            error for calc not found 
+     cmd>go run lab3.go Lab3Helper.go 
+          error  (observe error - package , import)
+      cmd>go build lab3.go Lab3Helper.go 
+            1 exe
+
+
 Lab2 - Lab2.go 
       package main
       
