@@ -1,0 +1,15 @@
+Lab1 - install go 
+      go version (any thing > than 1.11 
+      create a folder demo1, 
+      create a file demo1\Lab1.go 
+        package main
+        
+        import "fmt"
+        
+        func main() {
+        	fmt.Println("Hello World !!")
+        }
+  cmd>go build Lab1.go 
+      check exe created, run
+  cmd> go run Lab1.go 
+  cmd>go fmt Lab1.go 
