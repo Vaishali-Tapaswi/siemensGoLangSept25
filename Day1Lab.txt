@@ -1,3 +1,47 @@
+Lab4 - Lab4.go (accept input from user and if, for 
+package main
+
+import "fmt"
+
+func main() {
+	
+	name := "aaa"
+	fmt.Println(name)
+	fmt.Println("Enter your name ")
+	cnt, err := fmt.Scanln(&name)
+	fmt.Println(cnt, err)
+	fmt.Println(name)
+	
+	//marks := 20
+	var marks int
+	fmt.Println(marks)
+	fmt.Println("Enter your marks ")
+	cnt, err = fmt.Scanln(&marks)
+	fmt.Println(cnt, err)
+	fmt.Println(marks)
+	
+	no := 100/marks 
+	fmt.Println("NO is ", no)
+	fmt.Println("Finished")
+}
+	try giving different marks - 90, 90vvv, vvv 
+Write two files
+	Asgn1
+		Accept a number from user and print Fibonacci series till that number
+	if condition { 
+	} else {
+}
+Init, Condition and Post
+	for i := 0; i < 10; i++
+For is Go’s while
+	for sum < 1000 {
+Infinite Loop
+	for {
+
+	
+
+	
+
 Lab3 - Lab3.go (Functions and returns, multiple returns 
       create Lab3.go 
 
