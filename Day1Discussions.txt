@@ -1,0 +1,23 @@
+Java
+	Rich Client -> Desktop Application 
+	Thin Client -> Web Application 
+	Rich Internet Applications (RIA) - Single Page Application
+	
+Micro Services 
+	small Applications -> interact 	
+	
+Java -> Web Application(war)
+Deployment -> java code, compile (Byte Code), directory structure, deployment files(xml),create war 
+			  OS, jre, tomcat(web server), copy war file 
+			  
+	Java -> Slow 
+	Reverse Engg
+
+Fast -> Development Time
+		Deployment Time
+		Runtime 
+
+Golang
+	Functional Programming Language 
+
+
