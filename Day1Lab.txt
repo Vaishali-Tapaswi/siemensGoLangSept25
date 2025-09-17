@@ -1,3 +1,33 @@
+Lab11 - interfaces 
+	package main 
+	import "fmt"
+	
+	type tostr interface {
+		Convert() string 
+	}
+	
+	type Vertex  struct {
+		X int
+		Y int
+	}
+	
+	func (v1 Vertex) Convert() string{
+		fmt.Println("Convert running with Vertex", v1)
+		return "Converted"
+	}
+	
+	
+	func main(){
+		v1 := Vertex{}
+		var myinterface tostr
+		myinterface = v1
+		myinterface.Convert()
+		fmt.Println(v1)
+	}
+	Action -> try removing convert method, check error
+			  define one more method in interface and run 
+		Modify code to have Emp implementing tostr interface 
+
 Lab10 - Create a structure called Emp 
 		empno int, ename string, salary float  
 		two receiver methods
