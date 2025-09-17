@@ -1,3 +1,35 @@
+Lab2 - Lab2.go 
+      package main
+      
+      import (
+      	"fmt"
+      	"os"
+      	)
+      func main() {	
+      	// no intialization
+      	var a1 string
+      	// with intialization, data type is inferred
+      	var a2 = "aaa"
+      	// short syntax
+      	var a3, n1 = "aaa",300.39
+      	/*
+      	a3 := "aaaa"
+      	n1:=300.39
+      	*/
+      	fmt.Println("Hello World !!")
+      	fmt.Println(os.Args)
+      	fmt.Println(a1)
+      	fmt.Println(a2)
+      	fmt.Println(a3)
+      	fmt.Printf("%T ", n1)
+      	n1 = 330.330
+      	fmt.Println(n1)
+      }
+      Observe - 1. Variable/import declared but not used 
+                2. n1 = 3000/0 ->
+                3. n2 := 1000/n1 (where n1 is zero)
+                4. modify printf  to use %T twice with single variable
+
 Lab1 - install go 
       go version (any thing > than 1.11 
       create a folder demo1, 
