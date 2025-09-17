@@ -1,3 +1,44 @@
+--> Asgn -> accept a number from user and create string array of that size and accept names and print 
+Lab6 - make and append for dynamic allocation 
+	package main 
+	import "fmt"
+	func main(){
+		
+		slice1 := make([]int, 3)
+		slice1[0]=100
+		slice1[1]=200
+		fmt.Println(slice1 ,  " len is ", len(slice1), "cap is ", cap(slice1))
+		slice1 =  append(slice1,300)
+	
+		fmt.Println(slice1 ,  " len is ", len(slice1), "cap is ", cap(slice1))
+		slice1 =  append(slice1,400)
+		slice1 =  append(slice1,500)
+		fmt.Println(slice1 ,  " len is ", len(slice1), "cap is ", cap(slice1))
+		slice1 =  append(slice1,600)
+		fmt.Println(slice1 ,  " len is ", len(slice1), "cap is ", cap(slice1))
+	
+	}
+Lab5 - array and slice 
+	package main 
+	import "fmt"
+	func main(){
+		
+		primes := [6]int{2, 3, 5, 7, 11, 13}
+		
+		fmt.Println("Original Array" , primes, " len is ", len(primes), "cap is ", cap(primes))
+		sl1 := primes[2:4] // 4 is not included
+		fmt.Println("Slice 1 ", sl1 , "len is ", len(sl1), "cap is ", cap(sl1) )
+		sl1[0] = 99
+		sl1[1] = 100
+	
+		sl2 := primes[3:5] // 5 is not included
+		fmt.Println("Slice 2 ", sl2 , "len is ", len(sl2), "cap is ", cap(sl2) )
+		fmt.Println("Slice ", sl2 )
+		sl2[0] = 777
+		sl2[1] = 11111
+		
+		fmt.Println("Final " , primes)
+	}
 Lab4 - Lab4.go (accept input from user and if, for 
 package main
 
