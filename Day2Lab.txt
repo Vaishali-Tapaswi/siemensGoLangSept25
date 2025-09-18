@@ -1,3 +1,62 @@
+Lab11 - channel 
+package main 
+import ("fmt"
+"time"
+)
+const count=5000
+
+func main(){
+	//var ch chan int
+	ch := make(chan int)
+	go add(1000,30000, ch)
+	//wait for answer 
+	fmt.Println("Waiting for channel data .........") 
+	calsum := <-ch
+	fmt.Println("Got  channel data ......... ", calsum)  
+	//calsum = <-ch
+	//fmt.Println("Got  channel data ......... ", calsum)  
+	for{}
+}
+
+func add(n1, n2 int, ch1 chan int) {
+	fmt.Println("Calculating ......")
+	time.Sleep(1 * time.Second)
+	fmt.Println("Sending item1......")
+	sum := n1+ n2
+	ch1 <- sum
+	fmt.Println("Sending item2......")
+	ch1 <- n1-n2
+	fmt.Println("Finished sending data")
+}
+
+Lab10 - go routines, time slicing 
+	Create a folder demo4
+	Create Lab1.go 
+		package main 
+		import "fmt"
+		const count=5000
+		func main(){
+			fmt.Println("Enter a key to continue / stop")
+		
+			go printdetails("-")
+			go printdetails("*")
+			go printdetails("x")
+			fmt.Println("End of main")
+		
+			//Stop main program from close 
+			//Options - infinite for loop, scan, sleep 
+			//for{}
+			n:=0
+			fmt.Scan(&n)
+			
+		}
+		
+		func printdetails(str string){
+			for i:=1;i<count;i++{
+				fmt.Print(str)
+			}
+		}
+	
 Lab9 - write code to download https://jsonplaceholder.typicode.com/todos/1 json file 
 			just show title 
 	   write code to download https://jsonplaceholder.typicode.com/todos json file, use range method to show table of todos 
