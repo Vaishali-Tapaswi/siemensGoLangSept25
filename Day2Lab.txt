@@ -1,0 +1,25 @@
+Lab1 - Create folder Demo3
+      Lab1.go
+package main 
+
+import "fmt"
+
+func main(){
+	defer fmt.Println("Defer statement of main ")
+	fmt.Println("Hello")
+	print()
+	fmt.Println("World")
+	for  i :=0;i<5;i++ {
+		defer fmt.Println("Main - ", i)
+		}
+}
+
+func print(){
+	i := 10
+	defer fmt.Println("Closing Resources ", i)
+	fmt.Println("print - line1")
+	fmt.Println("print - line2")
+	i = 1000
+}
+
+Check defer stacking
