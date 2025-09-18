@@ -1,3 +1,66 @@
+Lab8 - 
+	struct -> type Emp struct {
+				 EmpNo  int
+				 Name   string
+				 Salary float64
+				}
+	Convert variable to emp to JSON 
+	convert EmpJson to object 
+	lib - encoding/json
+
+Lab7 - create http client 
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"os"
+	"io"
+)
+func main() {
+	url:="https://jsonplaceholder.typicode.com/todos/" + os.Args[1]
+	resp, err := http.Get(url)
+	fmt.Println("Done ")
+	fmt.Println(" err ", err)
+	fmt.Println("Status = ", resp.Status)
+	b, err := io.ReadAll(resp.Body)
+	fmt.Println("Body COntent " ,string(b) , err)
+}
+
+Lab6 - create http server 
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"io"
+)
+
+func main() {
+
+	http.HandleFunc("/",
+		func(w http.ResponseWriter, r *http.Request) {
+			//fmt.Fprintf(w, "<h1>Index Page</h1>")
+			w.Write([]byte("Hello World !!"))
+			
+		})
+	http.HandleFunc("/hello",
+		func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintf(w, "<h1>Hello Page !!</h1>")
+		})
+	
+	http.HandleFunc("/simple",
+		func(w http.ResponseWriter, r *http.Request) {
+			io.WriteString(w, "<body bgcolor='cyan'>Hello</body>")
+		})
+
+		
+
+	fmt.Println("Starting Server on 8080...")
+	http.ListenAndServe(":8080", nil)
+}
+
+
 Lab5 - module and external library 
 	create a folder - Lab5readprops
 	create two files 
