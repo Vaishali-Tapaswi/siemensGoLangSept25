@@ -1,3 +1,7 @@
+Lab9 - write code to download https://jsonplaceholder.typicode.com/todos/1 json file 
+			just show title 
+	   write code to download https://jsonplaceholder.typicode.com/todos json file, use range method to show table of todos 
+		
 Lab8 - 
 	struct -> type Emp struct {
 				 EmpNo  int
@@ -7,6 +11,39 @@ Lab8 -
 	Convert variable to emp to JSON 
 	convert EmpJson to object 
 	lib - encoding/json
+
+package main
+
+import (
+ "encoding/json"
+ "fmt"
+)
+
+type Emp struct {
+	EmpNo int     `json:"empno"`
+	Name  string  `json:"name"`
+	Salary   float64 `json:"sal"`
+}
+
+func main() {
+
+ emp1 := Emp{
+  EmpNo:  101,
+  Name:   "Vikram",
+  Salary: 75000.50,
+ }
+
+ fmt.Printf("Original Struct: %+v \n", emp1)
+
+ jsonEmp, err := json.Marshal(emp1)
+ fmt.Println("JSON String: ", string(jsonEmp), " Error: ", err)
+ err = json.Unmarshal(jsonEmp, &emp1)
+ fmt.Println("Unmarshal Error: ", err)
+ fmt.Printf("Unmarshalled Struct: %+v", emp1)
+
+}
+
+
 
 Lab7 - create http client 
 package main
