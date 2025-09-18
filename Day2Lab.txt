@@ -1,3 +1,10 @@
+Lab12 - 
+	Create a structure Bank with balance a variable 
+	create two functions -> increment(increase balance by 1), decrement (-1)
+	invoke this for loop 5 times for 100 iterations 
+	 -> sleep 5 seconds -> show final balance
+
+
 Lab11 - channel 
 package main 
 import ("fmt"
