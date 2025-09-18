@@ -1,3 +1,31 @@
+Lab5 - module and external library 
+	create a folder - Lab5readprops
+	create two files 
+		config.properties 
+			host=localhost
+			port=8080
+	Lab1.go
+		package main
+		import (
+			"fmt"
+			"github.com/magiconair/properties"
+		)
+		func main(){
+				p := properties.MustLoadFile("./config.properties", properties.UTF8)
+				v := p.GetString("host", "default value can't read prop file")
+				fmt.Println(v)
+				port := p.GetInt32("port", 80)
+				fmt.Println(port)
+		}
+	cmd in Lab5readprops>go run Lab1.go 
+		check error 
+	cmd>go mod init nameofmodule 
+		observe go.mod file getting created
+	cmd>go mod tidy 
+		observe go.mod file modified to include magiconair refernce and go.sum created 
+	cmd>go run . 
+		(any go file main.main will be executed)
+
 Lab4 - write Lab4 
 		func main to invoke input, calc
 		in function input -> accept input from user - two strings 
