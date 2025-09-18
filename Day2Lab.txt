@@ -1,3 +1,77 @@
+Lab4 - write Lab4 
+		func main to invoke input, calc
+		in function input -> accept input from user - two strings 
+		in function calculate -> accept two inputs both strings, divide and return int 
+	func main(){
+	str1,str2:= input()
+	calculate(str1,str2)
+}
+func input() (str1,str2){
+	print messages
+	accept two strings to be converted to numbers later 
+}
+func calculate(str1, str2){
+	//import strconv 
+	no1, _ = strconv.Atoi(str1)
+	no2, _ = strconv.Atoi(str2)
+	return no1/no2
+	
+}
+	Step1 - complete and run code without any error handling 
+    Step2 - register some calls to defer one in main other in calculate
+		pass wrong params (1 string param 2 second argument zero) -> watch error 
+    Step3 - write recover to just show message
+
+Lab3 - recover 
+package main 
+
+import "fmt"
+
+func main(){
+	defer fmt.Println("..............Defer in main")
+	defer test()
+	fmt.Println("Starting main ")
+	demo(4)
+	fmt.Println("Ending  main ")
+}
+func test() {
+	r := recover();
+	fmt.Println("in test function, current r is " , r)
+    if  r != nil {          fmt.Println("Recovered in test function ", r)}
+    }
+func demo(i int) {
+	defer fmt.Println("............trying to catch exception")
+	fmt.Println("starting line in g")
+    if i > 3 {
+		fmt.Println("Panicking!")
+        panic(fmt.Sprintf("Panic statement %v", i))
+    }
+	fmt.Println("ending line in Printing in g", i)
+}
+
+Lab2 - panic 
+package main 
+
+import "fmt"
+
+func main(){
+	defer fmt.Println("..............Defer in main")
+	fmt.Println("Starting main ")
+	demo(4)
+	fmt.Println("Ending  main ")
+}
+func demo(i int) {
+	defer fmt.Println("............trying to catch exception")
+	fmt.Println("starting line in g")
+    if i > 3 {
+		fmt.Println("Panicking!")
+        panic(fmt.Sprintf("Panic statement %v", i))
+    }
+	
+	fmt.Println("ending line in Printing in g", i)
+}
+
+
 Lab1 - Create folder Demo3
       Lab1.go
 package main 
