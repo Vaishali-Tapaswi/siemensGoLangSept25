@@ -1,3 +1,46 @@
+Lab2 - why synchronization
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+const counter = 100
+
+type Bank struct {
+	balance float64	
+}
+
+func (b *Bank) Increament(amount float64) {
+	for j := 0; j < counter; j++ {
+		tmp := b.balance + amount
+		time.Sleep(5 * time.Millisecond)
+		b.balance = tmp
+	}
+	fmt.Println("In Increment - current balance is ", b.balance)
+}
+
+func (b *Bank) Decrement(amount float64) {
+	for j := 0; j < counter; j++ {
+		tmp := b.balance - amount
+		time.Sleep(5 * time.Millisecond)	
+		b.balance = tmp
+	}
+	fmt.Println("In Decrement - current balance is ", b.balance)
+}
+
+func main() {
+	bank := Bank{balance: 00.0}
+	for i := 0; i < 5; i++ {
+		go bank.Increament(1)
+		go bank.Decrement(1)
+	}
+	time.Sleep(5 * time.Second)
+	fmt.Printf("Final balance for account is %.2f\n", bank.balance)
+}
+
+
 Lab1 - goroutine interaction, range for channel reading 
 package main 
 import (
