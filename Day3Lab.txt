@@ -1,3 +1,71 @@
+
+Lab4 - Testing 
+	create a new folder (demo5)
+	create Lab1.go 
+		package main 
+
+		import (
+			"fmt"
+		)
+		
+		func main(){
+			fmt.Println(Add(300,100))
+			fmt.Println(Divide(300,100))
+			fmt.Println(Divide(300,0))
+		}
+		func Add(no1, no2 int) int {
+			return no1+no2
+		}
+		func Divide(no1 , no2 int ) (int) {
+			return no1/no2;
+		}
+	create Lab1_test.go 
+		package main 
+		import (
+		//	"fmt"
+			"testing"
+		)
+		
+		func TestAdd(t *testing.T){
+			got := Add(4000,3000)
+		    if got != 7000 {
+		        t.Errorf("Add(4000,3000) = %d; want 7000", got)
+		    }
+		}
+		
+		func TestDivide(t *testing.T){
+			got := Divide(4000,400)
+		    if got != 10 {
+		        t.Errorf("Divide(4000,400) = %d; want 10", got)
+		    }
+		}
+		func TestDivide1(t *testing.T){
+			defer func(){
+				if r:= recover(); r == nil{
+					t.Errorf("Divide(4000,00) should create panic call")
+				}
+			}()
+			Divide(4000,0)
+		}
+	cmd>go test  Lab1_test.go 
+		check error
+	cmd>go test  Lab1_test.go  Lab1.go 
+		run successfully (just 1 line of info)
+	cmd>go test -v Lab1_test.go  Lab1.go  
+		verbose output of all tests
+	cmd>go mod init test 
+	cmd>go test . 
+	cmd>
+
+	Coverage (how many methods or code lines are tested 
+	cmd>go test -v . -cover
+		show %age of coverage without details
+	cmd>go test -v ..test.go  -coverprofile tmp.txt
+    	check tmp.txt file getting created
+    cmd>go tool cover -html=tmp.txt -o tmp.html
+		open tmp.html in browser 
+	
+
 Lab3 - Mutex + wg 
 package main
 
