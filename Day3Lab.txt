@@ -1,4 +1,8 @@
-
+Lab5- Create a folder demo6
+	Emp struct 
+	EmpDao struct 
+		2 methods -> add(Emp )
+					 list() Emp[]
 Lab4 - Testing 
 	create a new folder (demo5)
 	create Lab1.go 
