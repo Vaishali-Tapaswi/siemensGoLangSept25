@@ -1,8 +1,50 @@
 Lab5- Create a folder demo6
-	Emp struct 
-	EmpDao struct 
-		2 methods -> add(Emp )
-					 list() Emp[]
+		Create code to establish connection to postgres
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	_ "github.com/lib/pq"
+)
+
+type Emp struct {
+	EmpNo  int     `json:"empno"`
+	Name   string  `json:"name"`
+	Salary float64 `json:"sal"`
+}
+
+type EmpDao struct {
+	emps []Emp
+}
+
+func (dao *EmpDao) add(emp Emp) {
+	fmt.Println("add invoked", emp)
+}
+
+func (dao *EmpDao) list() {
+	fmt.Println("list invoked ")
+}
+
+func main() {
+
+	connStr := "postgres://postgres:MyPassword@database-1.cora8c66s2x6.us-east-1.rds.amazonaws.com/mydb?sslmode=disable"
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		fmt.Println("Error ", err)
+	}
+	fmt.Println(db)
+	//func (db *DB) Exec(query string, args ...any) (Result, error)
+	result, err := db.Exec("insert into EmpTable values(1, 'aaaa',1111.11)")
+	fmt.Println("Result", result)
+	fmt.Println("Error after insert ", err)
+}
+
+	create a module 
+	install dependencies
+	run code to check errors
+
+
 Lab4 - Testing 
 	create a new folder (demo5)
 	create Lab1.go 
