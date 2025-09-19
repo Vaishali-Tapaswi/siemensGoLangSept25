@@ -1,0 +1,41 @@
+Lab1 - goroutine interaction, range for channel reading 
+package main 
+import (
+	"fmt"
+	"strconv"
+)
+const count=50
+
+func main(){
+		ch := make(chan string)
+		go write(ch)
+		go read(ch)
+		for{
+
+		}
+}
+
+func read(ch1 chan string){
+	/*Option for fixed number of messages
+	for i:=1;i<5;i++{
+		fmt.Println("Reading data on channel")
+		str := <-ch1 
+		fmt.Println("Received   " + str)
+	}
+	*/
+	for msg := range ch1 {
+		fmt.Println("Reading data on channel")
+		fmt.Println("Received   " + msg)
+	}
+	close(ch1)
+
+}
+func write(ch1 chan string){
+	// in for loop write data to channel 
+	for i:=1;i<count;i++{
+		fmt.Println("Sending data to channel " , i)
+		ch1 <- "str"+strconv.Itoa(i)
+		fmt.Println("Finished sending data to channel " , i)
+	}
+	
+}
