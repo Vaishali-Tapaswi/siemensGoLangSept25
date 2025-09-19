@@ -1,3 +1,42 @@
+Lab8 - https://go.dev/blog/using-go-modules
+Lab 
+	create a folder (demo7)
+		create two folder - demo7\mylib
+							demo7\libuser 
+		create calc.go in demo7\mylib 
+			package calc
+			import "fmt"
+			func Hello(str string) string{
+				fmt.Println("in calc.hello with " , str)
+				return "Hello, "+ str
+			}
+			func Add(no1, no2 int) int {
+				fmt.Println("in calc add with ", no1, " ", no2)
+				return no1+no2
+			}
+		try doing go run calc.go
+		cmdmylib>>go mod init calc
+		cmdmylib>>go mod tidy
+	
+		create Lab1.go in demo7\libuser
+		package main 
+		import(
+			"fmt"
+			"calc"
+		)
+
+		func main(){
+			fmt.Println("in Lab1 of libuser")
+			str := calc.Hello("Vaishali")
+			fmt.Println(str)
+			num := calc.Add(1000,4000)
+			fmt.Println("Sum = ", num)
+		}
+		cmdlibuser>go mod init executable
+		cmdlibuser>go mod tidy
+		cmdlibuser>go mod edit -replace calc=../mylib
+		cmdlibuser>go run Lab1.go
+
 Lab7 - modify 
 		emp add method to include db insertion( with params)func (db *DB) Exec(query string, args ...any) (Result, error)
 			modify to pass 3 args in sql 
