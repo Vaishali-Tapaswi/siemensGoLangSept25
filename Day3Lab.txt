@@ -1,3 +1,4 @@
+Lab6 - Modify current code and dependencies to connect to mysql
 Lab5- Create a folder demo6
 		Create code to establish connection to postgres
 package main
