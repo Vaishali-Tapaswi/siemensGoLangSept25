@@ -1,3 +1,65 @@
+Lab3 - Mutex + wg 
+package main
+
+import (
+	"fmt"
+	"time"
+	"sync"
+)
+
+const counter = 100
+
+type Bank struct {
+	balance float64	
+	mymutext sync.Mutex
+}
+
+func (b *Bank) Increament(amount float64) {
+	b.mymutext.Lock()
+	defer b.mymutext.Unlock()
+	for j := 0; j < counter; j++ {
+		tmp := b.balance + amount
+		time.Sleep(1 * time.Millisecond)	
+		b.balance = tmp
+	}
+	fmt.Println("In Increment - current balance is ", b.balance)
+}
+
+func (b *Bank) Decrement(amount float64) {
+	b.mymutext.Lock()
+	defer b.mymutext.Unlock()
+	
+	for j := 0; j < counter; j++ {
+		tmp := b.balance - amount
+		time.Sleep(1 * time.Millisecond)	
+		b.balance = tmp
+	}
+	fmt.Println("In Decrement - current balance is ", b.balance)
+}
+
+func main() {
+	var wg sync.WaitGroup
+	bank := Bank{balance: 0.0}
+	wg.Add(1)
+	wg.Add(1)
+
+	go func(){
+		defer wg.Done()
+		bank.Increament(1)
+	}()
+	go func(){
+		defer wg.Done()
+		bank.Decrement(1)
+	}()
+	
+	fmt.Println("before wait")
+	wg.Wait()
+	fmt.Println("after wait")
+	fmt.Printf("Final balance for account is %.2f\n", bank.balance)
+	
+}
+
+
 Lab2 - why synchronization
 package main
 
