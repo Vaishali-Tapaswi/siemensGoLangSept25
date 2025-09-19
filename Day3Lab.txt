@@ -1,3 +1,8 @@
+Lab7 - modify 
+		emp add method to include db insertion( with params)func (db *DB) Exec(query string, args ...any) (Result, error)
+			modify to pass 3 args in sql 
+		modify emp list method to read data (func (db *DB) QueryRow(query string, args ...any) *Row)
+
 Lab6 - Modify current code and dependencies to connect to mysql -> observe errors, create database, create table 
 package main
 
