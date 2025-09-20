@@ -1,3 +1,42 @@
+Lab2 - Write Lib and Web app 
+create a folder final
+	subfolder - final/webapp
+in webapp - create web.go 
+
+/*
+Create Emp struct with json tags
+Write main to start http server
+Write Get/Post methods for /emps
+Test Code
+*/
+
+package main
+import (
+	"fmt"
+	"net/http"
+)
+type Emp struct {
+	EmpNo  int     `json:"empno"`
+	Name   string  `json:"name"`
+	Salary float64 `json:"sal"`
+}
+func main(){
+http.HandleFunc("/",
+		func(w http.ResponseWriter, r *http.Request) {
+			//fmt.Fprintf(w, "<h1>Index Page</h1>")
+			fmt.Println(r.Method)
+			// write switch case for method - get and post, just show messages
+			//modify get to return slice of emp as json 
+
+			w.Write([]byte("<h1>Hello World !!</h1> "))
+			
+		})
+	fmt.Println("Starting Server on 8080...")
+	http.ListenAndServe(":8080", nil)
+
+}
+
+
 Lab1 - Docker 
 go to dockerplayground
   docker run -it --name mycode golang /bin/bash
