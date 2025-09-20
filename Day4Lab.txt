@@ -27,6 +27,7 @@ http.HandleFunc("/",
 			fmt.Println(r.Method)
 			// write switch case for method - get and post, just show messages
 			//modify get to return slice of emp as json 
+			// modify post to create emp object from json  -> reqBody, _ := ioutil.ReadAll(r.Body)
 
 			w.Write([]byte("<h1>Hello World !!</h1> "))
 			
