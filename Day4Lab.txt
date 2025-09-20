@@ -3,39 +3,147 @@ create a folder final
 	subfolder - final/webapp
 in webapp - create web.go 
 
-/*
-Create Emp struct with json tags
-Write main to start http server
-Write Get/Post methods for /emps
-Test Code
-*/
+package main
+
+import (
+ "encoding/json"
+ "fmt"
+ "net/http"
+)
+
+var emps []Emp = make([]Emp, 0)
+
+
+func getEmps(w http.ResponseWriter) {
+ w.Header().Set("Content-Type", "application/json")
+ json.NewEncoder(w).Encode(emps)
+}
+
+func postEmps(w http.ResponseWriter, r *http.Request) {
+ var emp Emp
+ if err := json.NewDecoder(r.Body).Decode(&emp); err != nil {
+  http.Error(w, err.Error(), http.StatusBadRequest)
+  return
+ }
+ emps = append(emps, emp)
+ w.WriteHeader(http.StatusCreated)
+ fmt.Println(emps)
+}
+
+func main() {
+ 
+ http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+  switch r.Method {
+  case http.MethodGet:
+   getEmps(w)
+  case http.MethodPost:
+   postEmps(w, r)
+  }
+ })
+
+ fmt.Println("Starting Server on 8080...")
+ http.ListenAndServe(":8080", nil)
+}
+
+create dblib folder in Final 
+	emp.go 
+		package dblib
+		
+		type Emp struct {
+		 EmpNo  int     `json:"empno"`
+		 Name   string  `json:"name"`
+		 Salary float64 `json:"sal"`
+		}
+  dbcon.go 
+package dblib
+// write 3 functions 
+1. to get connection - return db and error 
+2. insert Emp method to return bool if insert is successful 
+3. getmethod to return slice of Emp 
 
 package main
+
 import (
+	"database/sql"
 	"fmt"
-	"net/http"
+	"log"
+	_ "github.com/go-sql-driver/mysql" 
+	"strconv"
 )
+
 type Emp struct {
 	EmpNo  int     `json:"empno"`
 	Name   string  `json:"name"`
 	Salary float64 `json:"sal"`
 }
-func main(){
-http.HandleFunc("/",
-		func(w http.ResponseWriter, r *http.Request) {
-			//fmt.Fprintf(w, "<h1>Index Page</h1>")
-			fmt.Println(r.Method)
-			// write switch case for method - get and post, just show messages
-			//modify get to return slice of emp as json 
-			// modify post to create emp object from json  -> reqBody, _ := ioutil.ReadAll(r.Body)
 
-			w.Write([]byte("<h1>Hello World !!</h1> "))
-			
-		})
-	fmt.Println("Starting Server on 8080...")
-	http.ListenAndServe(":8080", nil)
-
+type EmpDao struct{
+	
 }
+
+const connStr = "admin:MyPassword@tcp(mysqldb1.cora8c66s2x6.us-east-1.rds.amazonaws.com:3306)/dbname"
+
+func (dao *EmpDao) add(emp Emp) (noofrecord int64, err error) {
+	fmt.Println("in add with", emp)
+	db, err := sql.Open("mysql", connStr)
+	if err != nil {
+		fmt.Println("Error opening database:", err)
+		return 0, err
+	}
+	defer db.Close()
+
+	// Insert query execution
+	result, err := db.Exec("INSERT INTO EmpTable (empno, ename, salary) VALUES (?, ?, ?)", emp.EmpNo, emp.Name, emp.Salary)
+	if err != nil {
+		fmt.Println("Error executing insert query:", err)
+		return 0, err
+	}
+
+	noofrecord, err = result.RowsAffected()
+	if err != nil {
+		fmt.Println("Error getting rows affected:", err)
+		return 0, err
+	}
+
+	if noofrecord == 0 {
+		fmt.Println("No records were inserted.")
+		return 0, fmt.Errorf("no records inserted")
+	}
+
+	return noofrecord, nil
+}
+
+func (dao *EmpDao) list() ([]Emp, error) {
+	db, err := sql.Open("mysql", connStr)
+	if err != nil {
+		fmt.Println("Error opening database:", err)
+		return nil, err
+	}
+	defer db.Close()
+
+	rows, err := db.Query("SELECT empno, ename, salary FROM EmpTable")
+	if err != nil {
+		fmt.Println("Error executing select query:", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var employees []Emp
+	for rows.Next() {
+		var emp Emp
+		if err := rows.Scan(&emp.EmpNo, &emp.Name, &emp.Salary); err != nil {
+			fmt.Println("Error scanning row:", err)
+			return nil, err
+		}
+		employees = append(employees, emp)
+	}
+
+	return employees, nil
+}
+
+Modify code according to specs 
+create module for dblib and install deps
+
 
 
 Lab1 - Docker 
