@@ -35,6 +35,7 @@ Lab
 		cmdlibuser>go mod init executable
 		cmdlibuser>go mod tidy
 		cmdlibuser>go mod edit -replace calc=../mylib
+		cmdlibuser>go mod tidy 
 		cmdlibuser>go run Lab1.go
 
 Lab7 - modify 
