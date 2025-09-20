@@ -1,0 +1,57 @@
+Lab1 - Docker 
+go to dockerplayground
+  docker run -it --name mycode golang /bin/bash
+--> prompt of mycode container 
+  pwd (check current folder)
+  echo "{copyweb.gocontents" > web.go 
+package main
+import (
+	"fmt"
+	"net/http"
+)
+func main() {
+	http.HandleFunc("/",
+		func(w http.ResponseWriter, r *http.Request) {
+			//fmt.Fprintf(w, "<h1>Index Page</h1>")
+			w.Write([]byte("<h1>Hello World !!</h1>"))
+			
+		})
+	fmt.Println("Starting Server on 8080...")
+	http.ListenAndServe(":8080", nil)
+}
+--> prompt of mycode container 
+  go build web.go (automatically web file as linux output)
+------------------
+  in case of windows os 
+set GOOS=linux
+set GOARCH=amd64
+ go build web.go (build web file as linux output)
+------------------
+copy exexutable on local system 
+on main linux machine
+  mkdir demo8 
+  echo "" > dockerfile 
+    go to editor change docker to 
+    FROM ubuntu:latest
+    COPY ./web .
+    EXPOSE 8080
+    CMD ["./web"]
+
+  copy web file in demo 8 
+ cd demo8 
+ docker build . -t myimg 
+docker run -d -P myimg 
+  check the port and run into browser 
+
+
+
+
+
+
+create dockerfile 
+FROM ubuntu:latest
+COPY ./web .
+EXPOSE 8080
+CMD ["./web"]
+
+
