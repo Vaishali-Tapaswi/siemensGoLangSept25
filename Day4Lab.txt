@@ -1,3 +1,30 @@
+Delete - 
+func myhandlefunc1(w http.ResponseWriter, r *http.Request) {
+	switch method := r.Method; method {
+	case "DELETE":
+		fmt.Fprint(w, "<h1>DELETE Method</h1>"+r.Method)
+		
+		deptno := r.PathValue(deptno)
+		fmt.Println(deptno )
+	//	if err := dblib.Update(emp); err != nil {
+	//		fmt.Println(err)
+	//	}
+		fmt.Fprint(w, "<h1>DELETED </h1>")
+	}
+}
+
+http.HandleFunc("/dept/deptno", myhandlefunc1)
+
+dbcon.go 
+func  Delete(empno int) error {
+	dbConnection := getDBConnection()
+	defer dbConnection.Close()
+	query := "delete from  EmpTable where empno = ?"
+	_, err := dbConnection.Exec(query, empno)
+	return err
+}
+
+
 Modify web app to include 
 case "PUT":
 		fmt.Fprint(w, "<h1>PUT Method</h1>"+r.Method)
@@ -16,7 +43,7 @@ Dblib
 func  Update(emp Emp) error {
 	dbConnection := getDBConnection()
 	defer dbConnection.Close()
-	query = "UPDATE EmpTable set ename=?, salary=? where empno = ?"
+	query := "UPDATE EmpTable set ename=?, salary=? where empno = ?"
 	_, err := dbConnection.Exec(query, emp.EName, emp.Salary,  emp.EmpNo)
 	return err
 }
