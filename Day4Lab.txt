@@ -1,3 +1,28 @@
+Modify web app to include 
+case "PUT":
+		fmt.Fprint(w, "<h1>PUT Method</h1>"+r.Method)
+		emp := dblib.Emp{}
+		err := json.NewDecoder(r.Body).Decode(&emp)
+		fmt.Println("err", err)
+		fmt.Println("in post ", emp)
+		if err := dblib.Update(emp); err != nil {
+			fmt.Println(err)
+		}
+		fmt.Fprint(w, "<h1>Inserted </h1>")
+	}
+
+Dblib 
+
+func  Update(emp Emp) error {
+	dbConnection := getDBConnection()
+	defer dbConnection.Close()
+	query = "UPDATE EmpTable set ename=?, salary=? where empno = ?"
+	_, err := dbConnection.Exec(query, emp.EName, emp.Salary,  emp.EmpNo)
+	return err
+}
+
+
+
 Lab2 - Write Lib and Web app 
 create a folder final
 	subfolder - final/webapp
