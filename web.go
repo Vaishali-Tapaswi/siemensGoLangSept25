@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 func myhandlefunc(w http.ResponseWriter, r *http.Request) {
@@ -36,25 +38,26 @@ func myhandlefunc(w http.ResponseWriter, r *http.Request) {
 		if err := dblib.Update(emp); err != nil {
 			fmt.Println(err)
 		}
-		fmt.Fprint(w, "<h1>UPDATE </h1>")
-	}	
-}
-func myhandlefunc1(w http.ResponseWriter, r *http.Request) {
-	switch method := r.Method; method {
-	case "DELETE":
-		fmt.Fprint(w, "<h1>DELETE Method</h1>"+r.Method)
-		empno := r.PathValue("empno")
-		fmt.Println(empno )
-		if err := dblib.Delete(empno); err != nil {
-			fmt.Println(err)
+		fmt.Fprint(w, "<h1>UPDATED </h1>")	
+	case "DELETE" :
+		path := strings.TrimPrefix(r.URL.Path, "/dept/")
+		empno, err := strconv.Atoi(path)
+		fmt.Println(path, empno)
+		if err != nil {
+			http.Error(w, "invalid empno", http.StatusBadRequest)
+			return
 		}
-		fmt.Fprint(w, "<h1>DELETED </h1>")
+
+		if err := dblib.Delete(empno); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(map[string]string{"status": "Deleted"})
 	}
 }
-func main() {
 
-	http.HandleFunc("/dept", myhandlefunc)
-	http.HandleFunc("/dept/{deptno}", myhandlefunc1)
+func main() {
+	http.HandleFunc("/dept/", myhandlefunc)
     fmt.Println("Server starting on 8080.........")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
